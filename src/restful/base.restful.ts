@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { ClientService } from '@hsuite/client';
+import { LoggerHelper } from '@hsuite/helpers';
 
 /**
  * Abstract base class for RESTful services in the SmartNode SDK
@@ -25,16 +26,9 @@ import { ClientService } from '@hsuite/client';
 export abstract class BaseRestful {
   /**
    * Logger instance for the class
-   * 
-   * @description
-   * Provides standardized logging functionality for all RESTful services.
-   * Uses the NestJS Logger for consistent logging across the application.
-   * 
-   * @protected
-   * @readonly
-   * @since 2.0.0
+   * @type {LoggerHelper}
    */
-  protected readonly logger: Logger = new Logger(BaseRestful.name);
+  protected readonly logger: LoggerHelper = new LoggerHelper(BaseRestful.name);
 
   /**
    * Creates an instance of BaseRestful

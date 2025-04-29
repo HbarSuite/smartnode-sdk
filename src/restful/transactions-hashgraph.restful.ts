@@ -25,19 +25,13 @@ export class TransactionsHashgraphRestful extends BaseRestful {
      * @param {string} transactionId - Transaction ID
      * @param {number} [nonce] - Optional nonce value
      * @param {boolean} [scheduled] - Optional scheduled flag
-     * @returns {Promise<IHashgraph.IRestful.ITransactions.ITransaction.IDetails>}
+     * @returns {Promise<Hashgraph.Ledger.Transaction.Record>}
      */
     async getTransactionById(
-        transactionId: string,
-        nonce?: number,
-        scheduled?: boolean
-    ): Promise<IHashgraph.IRestful.ITransactions.ITransaction.IDetails> {
+        transactionId: string
+    ): Promise<Hashgraph.Ledger.Transaction.Record> {
         try {
-            const params = new URLSearchParams();
-            if (nonce !== undefined) params.append('nonce', nonce.toString());
-            if (scheduled !== undefined) params.append('scheduled', scheduled.toString());
-
-            const response = await this.client.axios.get(`${this.basePath}/${transactionId}`, { params });
+            const response = await this.client.axios.get(`${this.basePath}/query/${transactionId}`);
             return response.data;
         } catch (error) {
             this.logger.error('Error getting transaction by ID', error);
@@ -46,25 +40,19 @@ export class TransactionsHashgraphRestful extends BaseRestful {
     }
 
     /**
-     * Get transactions with filters
-     * @method getTransactions
-     * @param {Object} params - Query parameters
-     * @returns {Promise<IHashgraph.IRestful.ITransactions.ITransaction.IResponse>}
+     * Get transaction receipt by ID
+     * @method getTransactionReceipt
+     * @param {string} transactionId - Transaction ID
+     * @returns {Promise<Hashgraph.Ledger.Transaction.Receipt>}
      */
-    async getTransactions(params: {
-        accountId?: string;
-        limit?: number;
-        order?: 'asc' | 'desc';
-        timestamp?: string;
-        transactionType?: string;
-        result?: 'success' | 'fail';
-        type?: 'credit' | 'debit';
-    }): Promise<IHashgraph.IRestful.ITransactions.ITransaction.IResponse> {
+    async getTransactionReceipt(
+        transactionId: string
+    ): Promise<Hashgraph.Ledger.Transaction.Receipt> {
         try {
-            const response = await this.client.axios.get(this.basePath, { params });
+            const response = await this.client.axios.get(`${this.basePath}/receipt/${transactionId}`);
             return response.data;
         } catch (error) {
-            this.logger.error('Error getting transactions', error);
+            this.logger.error('Error getting transaction by ID', error);
             throw error;
         }
     }

@@ -35,14 +35,14 @@ export class ValidatorsRestful extends BaseRestful {
      * Adds a validator to the consensus topic
      * @method addConsensusValidator
      * @description Submits a new validator to the consensus topic with specified validation parameters
-     * @param {IValidators.IConsensus.IValidationParams} validationParams - Parameters for consensus validation
+     * @param {Omit<IValidators.IConsensus.IValidationParams, 'validateParams'>} validationParams - Parameters for consensus validation
      * @returns {Promise<string>} Consensus timestamp of the submitted transaction
      * @throws {Error} If validation parameters are invalid
      * @memberof ValidatorsRestful
      * @since 2.0.0
      */
     async addConsensusValidator(
-        validationParams: IValidators.IConsensus.IValidationParams
+        validationParams: Omit<IValidators.IConsensus.IValidationParams, 'validateParams'>
     ): Promise<string> {
         try {
             const response = await this.client.axios.post(`${this.basePath}/consensus`, validationParams);
@@ -79,14 +79,14 @@ export class ValidatorsRestful extends BaseRestful {
      * Adds a validator to the tokens topic
      * @method addTokenValidator
      * @description Submits a new validator to the tokens topic with specified validation parameters
-     * @param {IValidators.IToken.IValidationParams} validationParams - Parameters for token validation
+     * @param {Omit<IValidators.IToken.IValidationParams, 'validateParams'>} validationParams - Parameters for token validation
      * @returns {Promise<string>} Consensus timestamp of the submitted transaction
      * @throws {Error} If validation parameters are invalid
      * @memberof ValidatorsRestful
      * @since 2.0.0
      */
     async addTokenValidator(
-        validationParams: IValidators.IToken.IValidationParams
+        validationParams: Omit<IValidators.IToken.IValidationParams, 'validateParams'>
     ): Promise<string> {
         try {
             const response = await this.client.axios.post(`${this.basePath}/tokens`, validationParams);
@@ -123,14 +123,14 @@ export class ValidatorsRestful extends BaseRestful {
      * Adds a validator to the accounts topic
      * @method addAccountValidator
      * @description Submits a new validator to the accounts topic with specified validation parameters
-     * @param {IValidators.IAccount.IValidationParams} validationParams - Parameters for account validation
+     * @param {Omit<IValidators.IAccount.IValidationParams, 'validateParams'>} validationParams - Parameters for account validation
      * @returns {Promise<string>} Consensus timestamp of the submitted transaction
      * @throws {Error} If validation parameters are invalid
      * @memberof ValidatorsRestful
      * @since 2.0.0
      */
     async addAccountValidator(
-        validationParams: IValidators.IAccount.IValidationParams
+        validationParams: Omit<IValidators.IAccount.IValidationParams, 'validateParams'>
     ): Promise<string> {
         try {
             const response = await this.client.axios.post(`${this.basePath}/accounts`, validationParams);

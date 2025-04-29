@@ -1,5 +1,5 @@
 
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { SmartNodeRestful } from './restful/smartnode.restful';
 import { ClientService } from '@hsuite/client';
 import { ValidatorsRestful } from './restful/validators.restful';
@@ -7,6 +7,7 @@ import { AccountsHashgraphRestful } from './restful/accounts-hashgraph.restful';
 import { TransactionsHashgraphRestful } from './restful/transactions-hashgraph.restful';
 import { HcsHashgraphRestful } from './restful/hcs-hashgraph.restful';
 import { HtsHashgraphRestful } from './restful/hts-hashgraph.restful';
+import { LoggerHelper } from '@hsuite/helpers';
 
 /**
  * @file smartnode-sdk.service.ts
@@ -20,25 +21,46 @@ import { HtsHashgraphRestful } from './restful/hts-hashgraph.restful';
  */
 @Injectable()
 export class SmartNodeSdkService {
-    /** Logger instance for the SmartNodeSdkService */
-    private logger: Logger = new Logger(SmartNodeSdkService.name);
+    /**
+     * Logger instance for the SmartNodeSdkService
+     * @type {LoggerHelper}
+     */
+    private logger: LoggerHelper = new LoggerHelper(SmartNodeSdkService.name);
 
-    /** Restful service for core SmartNode operations */
+    /**
+     * Restful service for core SmartNode operations
+     * @type {SmartNodeRestful}
+     */
     readonly smartNodeRestful: SmartNodeRestful;
 
-    /** Restful service for validator operations */
+    /**
+     * Restful service for validator operations
+     * @type {ValidatorsRestful}
+     */
     readonly validatorsRestful: ValidatorsRestful;
 
-    /** Restful service for Hashgraph Consensus Service operations */
+    /**
+     * Restful service for Hashgraph Consensus Service operations
+     * @type {HcsHashgraphRestful}
+     */
     readonly hcsHashgraphRestful: HcsHashgraphRestful;
 
-    /** Restful service for Hashgraph account operations */
+    /**
+     * Restful service for Hashgraph account operations
+     * @type {AccountsHashgraphRestful}
+     */
     readonly accountsHashgraphRestful: AccountsHashgraphRestful;
 
-    /** Restful service for Hashgraph transaction operations */
+    /**
+     * Restful service for Hashgraph transaction operations
+     * @type {TransactionsHashgraphRestful}
+     */
     readonly transactionsHashgraphRestful: TransactionsHashgraphRestful;
 
-    /** Restful service for Hashgraph Token Service operations */
+    /**
+     * Restful service for Hashgraph Token Service operations
+     * @type {HtsHashgraphRestful}
+     */
     readonly htsHashgraphRestful: HtsHashgraphRestful;
 
     /**
@@ -54,11 +76,12 @@ export class SmartNodeSdkService {
         private readonly client: ClientService
     ) {
         this.logger.log('SmartNodeSdkService initialized');
-        this.smartNodeRestful = new SmartNodeRestful(sdkOptions, client);
-        this.validatorsRestful = new ValidatorsRestful(sdkOptions, client);
-        this.accountsHashgraphRestful = new AccountsHashgraphRestful(sdkOptions, client);
-        this.transactionsHashgraphRestful = new TransactionsHashgraphRestful(sdkOptions, client);
-        this.hcsHashgraphRestful = new HcsHashgraphRestful(sdkOptions, client);
-        this.htsHashgraphRestful = new HtsHashgraphRestful(sdkOptions, client);
+        // TODO: add ipfs, add snapshots...
+        this.smartNodeRestful = new SmartNodeRestful(this.sdkOptions, this.client);
+        this.validatorsRestful = new ValidatorsRestful(this.sdkOptions, this.client);
+        this.accountsHashgraphRestful = new AccountsHashgraphRestful(this.sdkOptions, this.client);
+        this.transactionsHashgraphRestful = new TransactionsHashgraphRestful(this.sdkOptions, this.client);
+        this.hcsHashgraphRestful = new HcsHashgraphRestful(this.sdkOptions, this.client);
+        this.htsHashgraphRestful = new HtsHashgraphRestful(this.sdkOptions, this.client);
     }
 }

@@ -121,6 +121,230 @@ export class HtsHashgraphRestful extends BaseRestful {
     }
 
     /**
+     * Deletes a token
+     * @method deleteToken
+     * @description Deletes a token with specified ID
+     * @param {string} tokenId - ID of the token to delete
+     * @returns {Promise<Uint8Array>} Transaction bytes for the token deletion
+     * @throws {Error} If token deletion fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async deleteToken(
+        tokenId: string
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.delete(`${this.basePath}/delete/${tokenId}`);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error deleting token', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Pauses a token
+     * @method pauseToken
+     * @description Pauses a token with specified ID
+     * @param {string} tokenId - ID of the token to pause
+     * @returns {Promise<Uint8Array>} Transaction bytes for the token pause
+     * @throws {Error} If token pause fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async pauseToken(
+        tokenId: string
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/pause/${tokenId}`);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error pausing token', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Unpauses a token
+     * @method unpauseToken
+     * @description Unpauses a token with specified ID
+     * @param {string} tokenId - ID of the token to unpause
+     * @returns {Promise<Uint8Array>} Transaction bytes for the token unpause
+     * @throws {Error} If token unpause fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async unpauseToken(
+        tokenId: string
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/unpause/${tokenId}`);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error unpausing token', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Freezes a token
+     * @method freezeToken
+     * @description Freezes a token with specified ID
+     * @param {string} tokenId - ID of the token to freeze
+     * @returns {Promise<Uint8Array>} Transaction bytes for the token freeze
+     * @throws {Error} If token freeze fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async freezeToken(
+        tokenId: string
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/freeze/${tokenId}`);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error freezing token', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Unfreezes a token
+     * @method unfreezeToken
+     * @description Unfreezes a token with specified ID
+     * @param {string} tokenId - ID of the token to unfreeze
+     * @returns {Promise<Uint8Array>} Transaction bytes for the token unfreeze
+     * @throws {Error} If token unfreeze fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async unfreezeToken(
+        tokenId: string
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/unfreeze/${tokenId}`);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error unfreezing token', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Grants KYC to an account
+     * @method grantKyc
+     * @description Grants KYC to an account with specified ID
+     * @param {string} tokenId - ID of the token to grant KYC to
+     * @param {IHashgraph.ILedger.IHTS.IKYC} params - KYC parameters
+     * @returns {Promise<Uint8Array>} Transaction bytes for the KYC grant
+     * @throws {Error} If KYC grant fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async grantKyc(
+        tokenId: string,
+        params: IHashgraph.ILedger.IHTS.IKYC
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/grant-kyc/${tokenId}`, params);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error granting KYC', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Revokes KYC from an account
+     * @method revokeKyc
+     * @description Revokes KYC from an account with specified ID
+     * @param {string} tokenId - ID of the token to revoke KYC from
+     * @param {IHashgraph.ILedger.IHTS.IKYC} params - KYC parameters
+     * @returns {Promise<Uint8Array>} Transaction bytes for the KYC revoke
+     * @throws {Error} If KYC revoke fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async revokeKyc(
+        tokenId: string,
+        params: IHashgraph.ILedger.IHTS.IKYC
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/revoke-kyc/${tokenId}`, params);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error revoking KYC', error);
+            throw error;
+        }
+    }
+    
+    /**
+     * Mints new tokens
+     * @method mintToken
+     * @description Mints new tokens with specified metadata
+     * @param {IHashgraph.ILedger.IHTS.IFungibleToken.IMint} params - Token minting parameters
+     * @returns {Promise<Uint8Array>} Transaction bytes for the token minting
+     * @throws {Error} If token minting fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async mintToken(
+        params: IHashgraph.ILedger.IHTS.IFungibleToken.IMint
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/mint/token`, params);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error minting token', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Wipes tokens from an account
+     * @method wipeToken
+     * @description Wipes tokens from an account with specified ID
+     * @param {IHashgraph.ILedger.IHTS.IWipe} params - Token wiping parameters
+     * @returns {Promise<Uint8Array>} Transaction bytes for the token wiping
+     * @throws {Error} If token wiping fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async wipeToken(
+        params: IHashgraph.ILedger.IHTS.IFungibleToken.IWipe
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/wipe/token`, params);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error wiping token', error);
+            throw error;
+        }   
+    }
+
+    /**
+     * Burns tokens
+     * @method burnToken
+     * @description Burns tokens with specified ID
+     * @param {IHashgraph.ILedger.IHTS.IBurn} params - Token burning parameters
+     * @returns {Promise<Uint8Array>} Transaction bytes for the token burning
+     * @throws {Error} If token burning fails
+     * @memberof HtsHashgraphRestful
+     * @since 2.0.0
+     */
+    async burnToken(
+        params: IHashgraph.ILedger.IHTS.IFungibleToken.IBurn
+    ): Promise<Uint8Array> {
+        try {
+            const response = await this.client.axios.post(`${this.basePath}/burn/token`, params);
+            return response.data;
+        } catch (error) {
+            this.logger.error('Error burning token', error);
+            throw error;
+        }
+    }
+
+    /**
      * Mints new NFTs
      * @method mintNftToken
      * @description Mints new NFTs with specified metadata
