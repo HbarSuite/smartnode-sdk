@@ -1,6 +1,6 @@
 {
     "name": "@hsuite/smartnode-sdk",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "main": "index.js",
     "types": "index.d.ts",
     "isPublic": true,
@@ -13,7 +13,7 @@
         "@nestjs/core": "^10.4.2"
     },
     "dependencies": {
-        "@hsuite/client": "^2.0.20",
+        "@hsuite/client": "^2.0.0",
         "@hsuite/hashgraph-types": "^2.0.0",
         "@hsuite/smart-network-types": "^2.0.0",
         "@hsuite/validators-types": "^2.0.0",

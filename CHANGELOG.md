@@ -20,3 +20,8 @@ All notable changes to this project will be documented in this file.
 - Modified: src/restful/validators.restful.ts
 - Modified: src/smartnode-sdk.service.ts
 - Modified: src/types/package.json
+
+## [2.0.2] - 2025-04-30
+
+- Modified: package.json
+- Modified: src/types/package.json
